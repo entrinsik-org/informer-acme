@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+body.informer.inf-login {
+  background-color: #37474f !important; }
+
+.acme-informer .inf-top-nav .top-state {
+  font-size: 32px;
+  padding-top: 2px;
+  font-family: 'Roboto Condensed', sans-serif !important; }
+
+.acme-informer .inf-top-nav .top-logo {
+  width: auto; }
+  .acme-informer .inf-top-nav .top-logo img {
+    height: 40px;
+    margin-top: 4px; }
+
+.acme-informer .acme-login .welcome-image {
+  height: 50px; }
+
+.acme-informer .acme-login .welcome-subtitle {
+  text-align: center;
+  color: #78909c; }
+
+.acme-informer .acme-login .login-button {
+  background-color: #607d8b !important; }

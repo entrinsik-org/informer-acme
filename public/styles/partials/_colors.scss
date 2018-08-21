@@ -1,0 +1,295 @@
+@import "material-colors";
+
+// Color modifiers
+
+@function adjust-lightness($color, $amount) {
+  @if (lightness($color) < 20) {
+    @return lighten($color, $amount);
+  }
+  @return darken($color, $amount);
+}
+
+@function header-color($color) {
+  @return darken($color, 5);
+}
+
+@function hover-color($color) {
+  @return saturate(adjust-lightness($color, 5), 10);
+}
+
+@function focus-color($color) {
+  @return saturate(adjust-lightness($color, 8), 20);
+}
+
+@function down-color($color) {
+  @return adjust-lightness($color, 10);
+}
+
+@function active-color($color) {
+  @return saturate(adjust-lightness($color, 5), 15);
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+
+  &:-moz-placeholder {
+    /* Firefox 18- */
+    @content;
+  }
+
+  &::-moz-placeholder {
+    /* Firefox 19+ */
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+// Material design colors
+$red: material-color('red');
+$pink: material-color('pink');
+$purple: material-color('purple');
+$deepPurple: material-color('deepPurple');
+$indigo: material-color('indigo');
+$blue: material-color('blue');
+$lightBlue: material-color('lightBlue');
+$cyan: material-color('cyan');
+$teal: material-color('teal');
+$green: material-color('green');
+$brightGreen: material-color('green', '400');
+$lightGreen: material-color('lightGreen', '600');
+$lime: material-color('lime');
+$yellow: material-color('yellow');
+$amber: material-color('amber');
+$amber100: material-color('amber', '100');
+$amber200: material-color('amber', '200');
+$orange: material-color('orange');
+$deepOrange: material-color('deepOrange');
+$brown: material-color('brown');
+$grey: material-color('grey');
+$blueGrey: material-color('blueGrey');
+$brightBlueGrey: #4085a0;
+$black: #000000;
+$white: #FFFFFF;
+
+// Custom colors
+$darkBlue: #1565C0;
+$informerRed: #FF5606; //from our logo, more like deepOrange
+
+// Neutrals
+$grey1: #E0E0E0;
+$grey2: #F5F5F5;
+$grey3: #FAFAFA;
+$iconGrey: #9F9F9F;
+$menuIconGrey: #757575;
+
+// Named Colors
+$primaryColor: $blue;
+$accentColor: $green;
+$warnColor: desaturate($red, 3);
+$backgroundColor: #EEEEEE;
+$backgroundColorAlt: #F7F7F7;
+$topBarBackground: #333;
+$sidenavBackgroundImage: '/images/background/nav-drawer-blue.svg';
+$infoPaneColor: transparentize(saturate($blueGrey, 10), 0.8);
+
+$theme-colors: (
+        'red': $red,
+        'pink': $pink,
+        'purple': $purple,
+        'deepPurple': $deepPurple,
+        'indigo': $indigo,
+        'blue': $blue,
+        'lightBlue': $lightBlue,
+        'cyan': $cyan,
+        'teal': $teal,
+        'green': $green,
+        'brightGreen': $brightGreen,
+        'brightBlueGrey': $brightBlueGrey,
+        'lightGreen': $lightGreen,
+        'lime': $lime,
+        'yellow': $yellow,
+        'amber': $amber,
+        'orange': $orange,
+        'deepOrange': $deepOrange,
+        'brown': $brown,
+        'grey': $grey,
+        'blueGrey': $blueGrey,
+        'black': $black,
+        'white': $white,
+        'md-primary': $primaryColor,
+        'md-accent': $accentColor,
+        'md-warn': $warnColor,
+        'darkBlue': $darkBlue
+);
+
+@mixin svg-color($color) {
+  svg {
+    fill: $color !important;
+    circle, path, * {
+      &:not([fill="none"]) {
+        fill: $color !important;
+      }
+    }
+  }
+}
+
+@mixin colorize-svg() {
+  @each $key, $color in $theme-colors {
+    &.#{$key} svg {
+      fill: $color !important;
+      circle, path, * {
+        &:not([fill="none"]) {
+          fill: $color !important;
+        }
+      }
+    }
+  }
+}
+
+@mixin color-contents($color, $property, $modify: '', $amount: 0) {
+  @if $modify == 'lighten' {
+    #{$property}: desaturate(lighten($color, $amount), $amount);
+  } @else if $modify == 'darken' {
+    #{$property}: darken($color, $amount);
+  } @else if $modify == 'transparentize' {
+    #{$property}: transparentize($color, $amount);
+  } @else {
+    #{$property}: $color;
+  }
+}
+
+@mixin colorize-hues($property) {
+  @each $key, $color in $theme-colors {
+    &.#{$key} {
+      #{$property}: $color;
+      @if ($key == 'indigo') {
+        &.md-hue-1 {
+          #{$property}: saturate($color, 5);
+        }
+        &.md-hue-2 {
+          #{$property}: saturate(lighten($color, 5), 10);
+        }
+        &.md-hue-3 {
+          #{$property}: saturate(lighten($color, 10), 15);
+        }
+        &.md-hue-4 {
+          #{$property}: saturate(lighten($color, 15), 20);
+        }
+        &.md-hue-5 {
+          #{$property}: desaturate(lighten($color, 15), 20);
+        }
+        &.md-hue-6 {
+          #{$property}: desaturate(lighten($color, 10), 15);
+        }
+        &.md-hue-7 {
+          #{$property}: desaturate(lighten($color, 5), 10);
+        }
+        &.md-hue-8 {
+          #{$property}: desaturate($color, 5);
+        }
+      } @else {
+        &.md-hue-1 {
+          #{$property}: saturate($color, 5);
+        }
+        &.md-hue-2 {
+          #{$property}: saturate(lighten($color, 5), 10);
+        }
+        &.md-hue-3 {
+          #{$property}: saturate(lighten($color, 10), 15);
+        }
+        &.md-hue-4 {
+          #{$property}: saturate(lighten($color, 15), 20);
+        }
+        &.md-hue-5 {
+          #{$property}: desaturate($color, 5);
+        }
+        &.md-hue-6 {
+          #{$property}: desaturate(darken($color, 5), 10);
+        }
+        &.md-hue-7 {
+          #{$property}: desaturate(darken($color, 10), 15);
+        }
+        &.md-hue-8 {
+          #{$property}: desaturate(darken($color, 15), 20);
+        }
+      }
+    }
+  }
+}
+
+@mixin colorize($property, $modify: '', $amount: 0) {
+  @each $key, $color in $theme-colors {
+    &.#{$key} {
+      @include color-contents($color, $property, $modify, $amount);
+    }
+  }
+}
+
+@mixin colorize-important($property, $modify: '', $amount: 0) {
+  @each $key, $color in $theme-colors {
+    &.#{$key} {
+      @if $modify == 'lighten' {
+        #{$property}: lighten($color, $amount) !important;
+      } @else if $modify == 'darken' {
+        #{$property}: darken($color, $amount) !important;
+      } @else {
+        #{$property}: $color !important;
+      }
+    }
+  }
+}
+
+@mixin colorize-box-shadow($child, $size) {
+  @each $key, $color in $theme-colors {
+    &.#{$key} #{$child} {
+      box-shadow: #{$size} $color;
+    }
+  }
+}
+
+@mixin colorize-child($child, $property, $modify: '', $amount: 0) {
+  @each $key, $color in $theme-colors {
+    &.#{$key} #{$child} {
+      @include color-contents($color, $property, $modify, $amount);
+    }
+  }
+}
+
+@mixin progress-circular-color($color) {
+  .md-inner {
+    .md-left .md-half-circle {
+      border-left-color: $color !important;
+    }
+    .md-half-circle {
+      border-top-color: $color !important;
+    }
+    .md-right .md-half-circle {
+      border-right-color: $color !important;
+    }
+    .md-gap {
+      border-top-color: $color !important;
+      border-bottom-color: $color !important;
+    }
+  }
+}
+
+@mixin colorize-toolbar() {
+  @each $key, $color in $theme-colors {
+    &.#{$key} md-toolbar {
+      background-color: $color;
+      background-image: url('/images/background/nav-drawer-#{$key}.svg');
+      background-size: 1100px;
+      background-position-x: 15%;
+      background-position-y: 10%;
+    }
+  }
+}
+
+@mixin robots() {
+
+}
