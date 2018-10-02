@@ -1,0 +1,8 @@
+{
+  "db": {
+    "database": "acme"
+  },
+  "plugins": {
+    "informer-acme": {}
+  }
+}

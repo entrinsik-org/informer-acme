@@ -1,9 +1,9 @@
-<div layout="column">
+<div layout="column" class="acme-login">
     <inf-top-nav></inf-top-nav>
 
-    <div style="background-color: purple!important" ng-class="{'fullscreen': !ctrl.$mdMedia('gt-xs')}" layout="column">
-        <h1 class="welcome-title">Welcome to Entrinsik's Chris Report Factory</h1>
-        <p>Please log in to continue</p>
+    <div class="login-frame" ng-class="{'fullscreen': !ctrl.$mdMedia('gt-xs')}" layout="column">
+        <img class="welcome-image" src="/assets/acme/images/acme-reporting.svg" title="Acme Corp Reporting">
+        <p class="welcome-subtitle">Please log in to continue</p>
         <md-input-container md-no-float ng-show="ctrl.domains.length > 1">
             <md-icon md-font-icon="material-icons">home</md-icon>
             <md-select ng-model="ctrl.domain" placeholder="Domain">
@@ -12,7 +12,7 @@
             </md-select>
         </md-input-container>
         <div class="login-component" layout="column" ng-model="ctrl.config" component="ctrl.driver.loginComponent"></div>
-        <md-button type="submit" class="md-raised md-accent" ng-disabled="ctrl.loggingIn">
+        <md-button type="submit" class="login-button blueGrey md-raised" ng-disabled="ctrl.loggingIn">
             Log In
         </md-button>
     </div>
