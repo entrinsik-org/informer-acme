@@ -4,7 +4,8 @@
   "description": "Example plugin for Acme Enterprises",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "example": "node example/node_modules/@entrinsik/informer/index.js --config=./example/config.json"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,6 @@
   },
   "homepage": "https://github.com/entrinsik-org/informer-acme#readme",
   "devDependencies": {
-    "@entrinsik/informer": "earlyAccess",
     "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
