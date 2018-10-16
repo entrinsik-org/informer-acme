@@ -49,6 +49,8 @@ exports.register = function (server, opts, next) {
         server.driver('systemFeature', require('./lib/user-auth-feature')(server))
     });
 
+    server.app.ext('elastic.search', require('./lib/user-filter')(server));
+
     next();
 };
 
