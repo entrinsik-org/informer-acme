@@ -2,11 +2,23 @@
 
 const path = require('path');
 
+/**
+ * All plugins start here, with the register function and setting the name attribute below (required)
+ * @param server
+ * @param opts
+ * @param next
+ */
 exports.register = function (server, opts, next) {
-    let bundle = server.bundle('acme').scan(__dirname, 'public');
 
+    // drivers, hooks and handlers
+    require('./server')(server);
+
+    // inject custom client code into framework
+    // referenced as '/assets/acme/*'
+    let bundle = server.bundle('acme').scan(__dirname, 'public');
     server.injector().inject(bundle);
 
+    // create route to access custom images
     server.select('content').route({
         method: 'GET',
         path: '/assets/acme/images/{path*}',
@@ -22,6 +34,7 @@ exports.register = function (server, opts, next) {
         }
     });
 
+    // replace login form with ours (may change in future localization release)
     server.route({
         path: '/login.html',
         method: 'get',
@@ -33,6 +46,7 @@ exports.register = function (server, opts, next) {
         }
     });
 
+    // replace informer logo with our acme svg
     server.route({
         path: '/images/informer.svg',
         method: 'get',
@@ -44,12 +58,6 @@ exports.register = function (server, opts, next) {
         }
     });
 
-    server.on('start', () => {
-        server.driver('domain', require('./lib/user-auth-domain')(server));
-        server.driver('systemFeature', require('./lib/user-auth-feature')(server))
-    });
-
-    server.app.ext('elastic.search', require('./lib/user-filter')(server));
 
     next();
 };

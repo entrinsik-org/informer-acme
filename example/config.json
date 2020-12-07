@@ -1,6 +1,7 @@
 {
   "db": {
-    "database": "acme"
+    "database": "acme",
+    "password": "secret"
   },
   "plugins": {
     "informer-acme": {}

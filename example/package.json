@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@entrinsik/informer": "^5.0.16-EA.2018-10-01",
+    "@entrinsik/informer": "^5.3.0",
     "informer-acme": "file:.."
   }
 }

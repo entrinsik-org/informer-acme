@@ -1,0 +1,21 @@
+<!--
+    The surrounding <div> is boilerplate. the ng-init makes sure domain.config is initialized to an empty
+    object if undefined.
+-->
+<div ng-init="$component.ngModel = $component.ngModel || {}" layout="column" class="md-block">
+    <!-- create an input and add 'ng-model="$component.ngModel.{config attr}"'
+          and it will show up in the config object on the domain record -->
+    <md-input-container md-no-float class="has-hints">
+        <label>JDBC URL</label>
+        <input name="url" flex ng-model="$component.ngModel.url" required />
+        <div class="hint">Enter in the JDBC URL For the database server</div>
+    </md-input-container>
+    <md-input-container md-no-float>
+        <label>JDBC Username</label>
+        <input name="username" flex ng-model="$component.ngModel.username" required />
+    </md-input-container>
+    <md-input-container md-no-float>
+        <label>JDBC Password</label>
+        <input name="password" type="password" flex ng-model="$component.ngModel.password" required />
+    </md-input-container>
+</div>
