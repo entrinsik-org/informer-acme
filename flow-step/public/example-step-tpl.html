@@ -1,0 +1,15 @@
+<!--
+    The surrounding <div> is boilerplate. the ng-init makes sure opts is initialized to an empty
+    object if undefined.
+-->
+<div ng-init="$component.ngModel = $component.ngModel || {}" layout="column" class="md-block">
+    <!-- create an input and add 'ng-model="$component.ngModel.{config attr}"'
+          and it will show up in the config object on the domain record -->
+    <!-- utility for creating a compatable alias with the field description -->
+    <inf-flow-label-alias ng-model="$component.ngModel" flex="50" flex-xs="100"></inf-flow-label-alias>
+    <!-- Choose numeric fields for our 2 inputs in our silly formula -->
+    <inf-dataset-field-select flex label="Left Side"
+                              ng-model="$component.ngModel.left" types="['double','integer']"></inf-dataset-field-select>
+    <inf-dataset-field-select flex label="Right Side"
+                              ng-model="$component.ngModel.right" types="['double','integer']"></inf-dataset-field-select>
+</div>

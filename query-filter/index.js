@@ -3,8 +3,8 @@
 const _ = require('lodash');
 const Logger = require('glib').Logger;
 const log = new Logger('query-filter');
-const QueryUtil = require('./lib/query-util');
-const filterFields = require('./lib/filter-fields');
+const QueryUtil = require('./server/lib/query-util');
+const filterFields = require('./server/lib/filter-fields');
 
 module.exports = server => {
     // add a checkbox to the features menu of all datasources to tag the ones that should be filtered

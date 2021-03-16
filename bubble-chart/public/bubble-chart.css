@@ -1,0 +1,10 @@
+/* All *.css files are automatically loaded. they can all be in one stylesheet if you have multiple visuals */
+.svg-viewer { flex: 1; position: relative; }
+.svg-viewer-wrapper, .svg-viewer svg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
