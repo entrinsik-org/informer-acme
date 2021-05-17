@@ -1,0 +1,60 @@
+<inf-side-tabs tabs="ctrl.tabs" ng-model="ctrl.tab" flex>
+    <md-content ng-switch on="ctrl.tab" flex layout="column">
+        <!-- Settings tab (default) -->
+        <md-content flex ng-switch-default>
+            <div layout="column" class="padded">
+                <md-subheader inf-top-state-color class="md-no-sticky">
+                    Series
+                </md-subheader>
+
+                <md-input-container ng-if="::ctrl.chooseDataset">
+                    <label>Source Dataset</label>
+                    <md-select ng-model="ctrl.model.alias" required>
+                        <md-option ng-repeat="$ds in ctrl.dsCtrl.datasets"
+                                   ng-value="$ds.alias">
+                            {{ $ds.name }}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <!-- select fields from the selected dataset -->
+                <inf-dataset-field-select label="Group by" ng-model="ctrl.model.x" types="ctrl.groupByTypes"
+                                          fields="ctrl.dsCtrl.datasets[ctrl.model.alias].fields"></inf-dataset-field-select>
+
+                <!-- choose aggregate for the bubbles. numbers-only because date aggs don't make sense -->
+                <inf-aggregate-select required label="Value field"
+                                      ng-model="ctrl.model.series[0].y" supports-custom="true"
+                                      numbers-only="true"
+                                      dataset="ctrl.dsCtrl.datasets[ctrl.model.alias]"></inf-aggregate-select>
+                <!-- how many bubbles -->
+                <md-input-container>
+                    <label>Number of groups to show</label>
+                    <input type="number" min="1" ng-model="ctrl.model.n" ng-model-options="{ debounce: 800 }">
+                </md-input-container>
+            </div>
+        </md-content>
+        <!-- Color Tab -->
+        <md-content ng-switch-when="color" layout="column" flex>
+            <div layout="column" class="padded">
+                <md-subheader inf-top-state-color class="md-no-sticky">
+                    Colors
+                </md-subheader>
+                <inf-color-by ng-model="ctrl.model.series[0]"></inf-color-by>
+            </div>
+        </md-content>
+        <!-- text color and size -->
+        <md-content ng-switch-when="labels" layout="column" flex>
+            <div layout="column" class="padded">
+                <md-subheader inf-top-state-color class="md-no-sticky">
+                    Labels
+                </md-subheader>
+                <md-input-container>
+                    <inf-set-color-chooser ng-model="ctrl.model.labels"></inf-set-color-chooser>
+                </md-input-container>
+                <md-input-container>
+                    <label>Font Size (px)</label>
+                    <input type="number" min="9" max="40" ng-model="ctrl.model.labels.size" ng-model-options="{ debounce: 800 }">
+                </md-input-container>
+            </div>
+        </md-content>
+    </md-content>
+</inf-side-tabs>

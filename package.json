@@ -1,6 +1,6 @@
 {
   "name": "informer-acme",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Example plugin for Acme Enterprises",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,9 @@
     "url": "https://github.com/entrinsik-org/informer-acme/issues"
   },
   "homepage": "https://github.com/entrinsik-org/informer-acme#readme",
+  "dependencies": {
+    "d3-node": "^2.2.2"
+  },
   "devDependencies": {
     "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
